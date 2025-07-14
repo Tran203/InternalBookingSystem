@@ -1,7 +1,17 @@
+using InternalBookingSystem.Context;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+// Register the DbContext with dependency injection
+builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(
+    builder.Configuration.GetConnectionString("DefaultConnection") //Find Conn Str
+    ));
+
+
 
 var app = builder.Build();
 
